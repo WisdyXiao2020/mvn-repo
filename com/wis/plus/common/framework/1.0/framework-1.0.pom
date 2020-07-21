@@ -2,18 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.wis.plus.common</groupId>
-    <artifactId>common</artifactId>
+    <artifactId>SpringWisPlus</artifactId>
     <version>1.0</version>
   </parent>
   <artifactId>framework</artifactId>
-  <version>1.0</version>
   <name>framework</name>
   <description>spring shiro boot framework</description>
-
-  <properties>
-	  <!-- github server corresponds to entry in ~/.m2/settings.xml -->
-	  <github.global.server>github</github.global.server>
-  </properties>
   <dependencies>
        <!-- spring-boot start -->
        <dependency>
@@ -94,68 +88,15 @@
 	    <version>1.2.7</version>
 	</dependency>
    </dependencies>
-	<distributionManagement>
-	    <repository>
-	        <id>internal.repo</id>
-	        <name>Temporary Staging Repository</name>
-	        <url>file://${project.build.directory}/mvn-repo</url>
-	    </repository>
-	</distributionManagement>
-  <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-       <plugins>
-           <!--打包插件-->
+   <build>
+        <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.1</version>
                 <configuration>
                     <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
                 </configuration>
-			</plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version >0.12</version>
-                <configuration>
-                    <message >Maven artifacts for ${project.version}</message>
-                    <noJekyll>true</noJekyll>
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory><!--本地jar地址-->
-                    <branch>refs/heads/master</branch><!--分支的名称-->
-                    <merge>true</merge>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
-                    <repositoryName>mvn-repo</repositoryName><!--对应github上创建的仓库名称 name-->
-                    <repositoryOwner>WisdyXiao2020</repositoryOwner><!--github 仓库所有者即登录用户名-->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                    </execution>
-                </executions>
             </plugin>
-       </plugins>
-   </build>
-   <profiles>
-	<profile>
-	    <id>jdk-1.8</id>
-	    <activation>
-	        <activeByDefault>true</activeByDefault>
-	        <jdk>1.8</jdk>
-	    </activation>
-	    <properties>
-	        <maven.compiler.source>1.8</maven.compiler.source>
-	        <maven.compiler.target>1.8</maven.compiler.target>
-	        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-	    </properties>
-	</profile>
-	</profiles>
+        </plugins>
+    </build>
 </project>
