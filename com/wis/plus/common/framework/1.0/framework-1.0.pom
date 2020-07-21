@@ -72,12 +72,13 @@
            <version>${jwt.version}</version>
        </dependency>
        <!-- Shiro+JWT end -->
-
+	  <!-- 
        <dependency>
            <groupId>com.wis.plus.common</groupId> 
            <artifactId>config</artifactId>
            <version>1.0</version>
        </dependency>
+        -->
 	<dependency>
 	    <groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-mail</artifactId>
@@ -88,6 +89,9 @@
 	    <version>1.2.7</version>
 	</dependency>
    </dependencies>
+   <properties>
+       <github.global.server>github</github.global.server>
+   </properties>
    <build>
         <plugins>
             <plugin>
@@ -96,6 +100,32 @@
                 <configuration>
                     <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
                 </configuration>
+            </plugin>
+
+           <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version >0.12</version>
+                <configuration>
+                    <message >Maven artifacts for ${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory><!--本地jar地址-->
+                    <branch>refs/heads/master</branch><!--分支的名称-->
+                    <merge>true</merge>
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <repositoryName>mvn-repo</repositoryName><!--对应github上创建的仓库名称 name-->
+                    <repositoryOwner>WisdyXiao2020</repositoryOwner><!--github 仓库所有者即登录用户名-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
