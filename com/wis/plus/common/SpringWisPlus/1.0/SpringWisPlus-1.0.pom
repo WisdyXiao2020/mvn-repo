@@ -69,7 +69,9 @@
    </properties>
 
    <modules>
+   	   <!-- 
        <module>framework</module>
+        -->
        <module>config</module>
    </modules>
 
@@ -270,7 +272,7 @@
            </dependency>
 
            <!-- 项目模块start -->
-          
+          <!-- 
            <dependency>
                <groupId>com.wis.plus.common</groupId>
                <artifactId>config</artifactId>
@@ -281,6 +283,7 @@
                <artifactId>framework</artifactId>
                <version>${project.version}</version>
            </dependency>
+            -->
            <!-- 项目模块end -->
 
        </dependencies>
